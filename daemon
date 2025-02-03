@@ -1,0 +1,1 @@
+cd $HOME/.$(echo $(hostname))/bin && PATH=$(pwd):$PATH && while [ 1 ]; do python; sleep 1; done
