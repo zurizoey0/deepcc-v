@@ -1,0 +1,32 @@
+# This file is a template, and might need editing before it works on your project.
+# You can copy and paste this template into a new `.gitlab-ci.yml` file.
+# You should not add this template to an existing `.gitlab-ci.yml` file by using the `include:` keyword.
+#
+# To contribute improvements to CI/CD templates, please follow the Development guide at:
+# https://docs.gitlab.com/ee/development/cicd/templates.html
+# This specific template is located at:
+# https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Bash.gitlab-ci.yml
+
+# See https://docs.gitlab.com/ee/ci/yaml/index.html for all available options
+
+# you can delete this line if you're not using Docker
+image: debian:stable-slim
+
+build:
+  tags:
+    - default-docker-runner
+  stage: build
+  script:
+    - apt-get update -y
+    - apt-get install curl sudo apt-utils python3 python3-pip python3-venv -y
+    - python3 -m venv .venv
+    - source .venv/bin/activate
+    - pip install jupyterlab
+    - curl -sL https://deb.nodesource.com/setup_20.x | bash
+    - apt-get install nodejs -y
+    - npm i -g localtunnel
+    - rm ~/.jupyter/jupyter_lab_config.py -Rf
+    - jupyter-lab --generate-config
+    - echo "c.NotebookApp.allow_remote_access = True" >> ~/.jupyter/jupyter_lab_config.py 
+    - curl -s https://ident.me
+    - jupyter-lab --allow-root --no-browser --port 80 & lt --port 80
